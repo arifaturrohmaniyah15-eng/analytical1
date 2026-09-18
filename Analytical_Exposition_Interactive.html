@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Analytical Exposition</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef4ff,#fff7ed);color:#243047}
+.container{max-width:900px;margin:auto;padding:22px}
+.hero{background:#fff;border-radius:24px;padding:28px;box-shadow:0 8px 25px rgba(40,60,100,.12);text-align:center}
+.hero h1{margin:8px 0;font-size:clamp(28px,5vw,44px);color:#244b8f}.hero p{color:#667085}
+.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0}.nav button,.btn{border:0;border-radius:12px;padding:12px 16px;background:#e8eefb;color:#244b8f;font-weight:bold;cursor:pointer;min-height:44px}.nav button.active,.btn.primary{background:#244b8f;color:#fff}
+.card{background:#fff;border-radius:18px;padding:22px;margin:15px 0;box-shadow:0 5px 18px rgba(40,60,100,.08)}h2{color:#244b8f;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.mini{border:1px solid #dce3ef;border-radius:15px;padding:17px;background:#f9fbff}.mini h3{margin:0 0 7px}
+.pill{display:inline-block;padding:7px 11px;border-radius:20px;background:#edf2ff;margin:4px;font-size:14px}
+.textpart{border-left:6px solid #7397dc;padding:15px;margin:10px 0;background:#f7f9fc;border-radius:10px}.textpart b{color:#244b8f}
+.choice{display:block;width:100%;text-align:left;margin:9px 0;border:1px solid #d5dcea;background:#fff;border-radius:12px;padding:13px;cursor:pointer;font-size:15px}.choice:hover{background:#f1f5ff}.correct{background:#e9f7ed!important;border-color:#57a36a!important}.wrong{background:#fff0f0!important;border-color:#c65a5a!important}
+.feedback{font-weight:bold;margin-top:10px;min-height:22px}.hidden{display:none}.progress{height:9px;background:#e7ebf3;border-radius:9px;overflow:hidden}.progress span{display:block;height:100%;background:#7397dc;width:0}
+footer{text-align:center;color:#667085;font-size:13px;padding:20px}
+@media(max-width:600px){.container{padding:12px}.card,.hero{padding:18px}.nav button{flex:1 1 45%}}
+</style>
+</head>
+<body>
+<div class="container">
+<section class="hero">
+<div>📚 ENGLISH • SMA</div>
+<h1>Analytical Exposition Text</h1>
+<p>Learn • Explore • Practice • Challenge</p>
+</section>
+
+<div class="nav">
+<button class="active" data-tab="learn">📚 Learn</button>
+<button data-tab="structure">🧩 Structure</button>
+<button data-tab="text">📖 Explore Text</button>
+<button data-tab="quiz">🎯 Quiz</button>
+</div>
+
+<section id="learn" class="tab card">
+<h2>What is Analytical Exposition?</h2>
+<p>An <b>analytical exposition</b> is a text that presents the writer's opinion or argument about an issue and supports it with reasons.</p>
+<div class="grid">
+<div class="mini"><h3>🎯 Purpose</h3><p>To persuade readers that an idea or opinion is important or reasonable.</p></div>
+<div class="mini"><h3>💡 Topic</h3><p>Usually discusses current or familiar issues.</p></div>
+<div class="mini"><h3>🗣️ Main Idea</h3><p>Opinion + reasons + reinforcement.</p></div>
+</div>
+<h3>Language Features</h3>
+<span class="pill">Simple Present Tense</span><span class="pill">Opinion verbs</span><span class="pill">Connectives</span><span class="pill">Causal words</span><span class="pill">Persuasive expressions</span>
+</section>
+
+<section id="structure" class="tab card hidden">
+<h2>🧩 Text Structure</h2>
+<div class="grid">
+<div class="mini"><h3>1️⃣ Thesis</h3><p>Introduces the topic and states the writer's position.</p></div>
+<div class="mini"><h3>2️⃣ Arguments</h3><p>Presents reasons and explanations supporting the thesis.</p></div>
+<div class="mini"><h3>3️⃣ Reiteration</h3><p>Restates the writer's position and reinforces the argument.</p></div>
+</div>
+<div class="card">
+<h3>Quick Check</h3><p>Which part contains the reasons supporting the writer's opinion?</p>
+<button class="choice structure-choice" data-correct="false">A. Thesis</button>
+<button class="choice structure-choice" data-correct="true">B. Arguments</button>
+<button class="choice structure-choice" data-correct="false">C. Reiteration</button>
+<div class="feedback" id="structureFeedback"></div>
+</div>
+</section>
+
+<section id="text" class="tab card hidden">
+<h2>📖 Explore the Text</h2>
+<h3>The Urgency of Digital Literacy for Modern Teenagers</h3>
+<div class="textpart"><b>THESIS</b><p>Digital literacy is essential for modern teenagers because they use digital technology for learning, communication, and entertainment every day.</p></div>
+<div class="textpart"><b>ARGUMENT 1</b><p>First, digital literacy helps teenagers identify reliable information. The internet contains useful information, but not everything online is accurate.</p></div>
+<div class="textpart"><b>ARGUMENT 2</b><p>Second, digital literacy encourages responsible online communication. Teenagers need to understand how their words and actions can affect others.</p></div>
+<div class="textpart"><b>REITERATION</b><p>Therefore, digital literacy should become an important part of teenagers' education so they can use technology wisely and responsibly.</p></div>
+<button class="btn primary" id="connectiveBtn">🔎 Find the Connectives</button>
+<p id="connectives" class="hidden"><b>Connectives:</b> because, First, but, Second, Therefore.</p>
+</section>
+
+<section id="quiz" class="tab card hidden">
+<h2>🎯 Challenge Quiz</h2>
+<div class="progress"><span id="progress"></span></div>
+<div id="quizBox"></div>
+<div id="quizFeedback" class="feedback"></div>
+<button class="btn primary" id="nextBtn">Next Question →</button>
+<div id="finalScore"></div>
+</section>
+
+<footer>Interactive Learning Media • Analytical Exposition Text</footer>
+</div>
+
+<script>
+const tabs=document.querySelectorAll('.tab');
+const nav=document.querySelectorAll('.nav button');
+nav.forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  nav.forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  tabs.forEach(t=>t.classList.toggle('hidden',t.id!==btn.dataset.tab));
+ });
+});
+
+document.querySelectorAll('.structure-choice').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  const ok=btn.dataset.correct==='true';
+  document.querySelectorAll('.structure-choice').forEach(b=>b.classList.remove('correct','wrong'));
+  btn.classList.add(ok?'correct':'wrong');
+  document.getElementById('structureFeedback').textContent=ok?'✅ Correct! Arguments contain the supporting reasons.':'❌ Try again. Think about the section that explains why the writer supports the thesis.';
+ });
+});
+
+document.getElementById('connectiveBtn').addEventListener('click',()=>{
+ document.getElementById('connectives').classList.toggle('hidden');
+});
+
+const questions=[
+ {q:'What is the main purpose of an analytical exposition?',a:['To entertain readers','To persuade readers about an idea','To describe a person'],c:1},
+ {q:'Which structure introduces the writer’s position?',a:['Thesis','Arguments','Reiteration'],c:0},
+ {q:'Which tense is commonly used in analytical exposition?',a:['Simple Present','Simple Past','Past Perfect'],c:0},
+ {q:'Which word is a connective in the sample text?',a:['Therefore','Teenagers','Technology'],c:0},
+ {q:'What does the reiteration do?',a:['Introduces a new topic','Restates the writer’s position','Lists vocabulary'],c:1}
+];
+let qi=0,score=0,answered=false;
+const box=document.getElementById('quizBox'),feedback=document.getElementById('quizFeedback'),next=document.getElementById('nextBtn'),progress=document.getElementById('progress'),final=document.getElementById('finalScore');
+
+function renderQuestion(){
+ answered=false;feedback.textContent='';final.textContent='';
+ const x=questions[qi];
+ progress.style.width=((qi)/questions.length*100)+'%';
+ box.innerHTML='<p><b>Question '+(qi+1)+' of '+questions.length+'</b></p><p>'+x.q+'</p>';
+ x.a.forEach((ans,i)=>{
+  const b=document.createElement('button');b.className='choice';b.textContent=String.fromCharCode(65+i)+'. '+ans;
+  b.addEventListener('click',()=>{
+   if(answered)return;answered=true;
+   document.querySelectorAll('#quizBox .choice').forEach(z=>z.disabled=true);
+   if(i===x.c){score++;b.classList.add('correct');feedback.textContent='✅ Correct!';}
+   else{b.classList.add('wrong');feedback.textContent='❌ Not quite. The correct answer is '+String.fromCharCode(65+x.c)+'. '+x.a[x.c]+'.';document.querySelectorAll('#quizBox .choice')[x.c].classList.add('correct');}
+  });box.appendChild(b);
+ });
+}
+next.addEventListener('click',()=>{
+ if(!answered){feedback.textContent='Please choose an answer first.';return}
+ if(qi<questions.length-1){qi++;renderQuestion();}
+ else{progress.style.width='100%';box.innerHTML='<h3>🎉 Quiz Completed!</h3>';final.innerHTML='<p><b>Your score: '+score+'/'+questions.length+'</b></p>';next.disabled=true;next.textContent='Completed';}
+});
+renderQuestion();
+</script>
+</body>
+</html>
